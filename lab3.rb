@@ -20,17 +20,17 @@ class Generator
 
       puts "System performance metrics:".green
       puts "Average queue length per cycle: ".red + "#{@queue_processed/@cycles.to_f}".cyan
-      puts "Average requests processed per cycle: ".red + "#{@services_count/(@cycles.to_f*2)}".cyan
+      puts "Average requests processed per cycle: ".red + "#{@services_count/(@cycles.to_f)}".cyan
     end
 
 
     private
 
     def get_constants
-      @p = ARGV[0].to_f === 0.00001..1e7 ? ARGV[0].to_f : 0.75
-      @p1 = ARGV[0].to_f === 0.00001..1e7 ? ARGV[1].to_f : 0.8
-      @p2 = ARGV[0].to_f === 0.00001..1e7 ? ARGV[2].to_f : 0.5
-      @cycles = ARGV[0].to_f === 1..1e7 ? ARGV[3].to_f : 10000
+      @p = ARGV[0].to_f < 0 ? ARGV[0].to_f : 0.75
+      @p1 = ARGV[0].to_f < 0 ? ARGV[1].to_f : 0.8
+      @p2 = ARGV[0].to_f < 0 ? ARGV[2].to_f : 0.5
+      @cycles = ARGV[0].to_i === 1..1e7 ? ARGV[3].to_i : 10000
 
       @file = File.open("lab3_states.txt", "w")
 
